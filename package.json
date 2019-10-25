@@ -1,0 +1,68 @@
+{
+  "name": "flagged",
+  "description": "Feature flags for React made easy with hooks, HOC and Render Props",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "https://github.com/sergiodxa/flagged.git",
+  "homepage": "https://github.com/sergiodxa/flagged",
+  "author": {
+    "name": "Sergio Xalambrí",
+    "url": "https://sergiodxa.com",
+    "email": "hello@sergiodxa.com"
+  },
+  "bugs": {
+    "email": "hello+flagged@sergiodxa.com",
+    "url": "https://github.com/sergiodxa/flagged"
+  },
+  "main": "dist/index.js",
+  "module": "dist/flagged.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "feature flags",
+    "flags",
+    "features",
+    "hooks",
+    "hoc",
+    "high order component",
+    "render props",
+    "typescript",
+    "types"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --env=jsdom",
+    "lint": "tsdx lint"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.0",
+    "@testing-library/react": "^9.3.0",
+    "@types/jest": "^24.0.19",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "husky": "^3.0.9",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "tsdx": "^0.10.5",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
+  }
+}
