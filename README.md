@@ -1,8 +1,19 @@
 # Flagged
 
-> Feature flags for React made easy with hooks, HOC and Render Props
+### Feature flags for React made easy with hooks, HOC and Render Props
 
-- React-based
+![CI Status](https://github.com/sergiodxa/flagged/workflows/CI/badge.svg)
+![Publish Status](https://github.com/sergiodxa/flagged/workflows/Publish/badge.svg)
+![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=sergiodxa/flagged)
+[![Maintainability](https://api.codeclimate.com/v1/badges/816ce0bddd76bafba932/maintainability)](https://codeclimate.com/github/sergiodxa/flagged/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/816ce0bddd76bafba932/test_coverage)](https://codeclimate.com/github/sergiodxa/flagged/test_coverage)
+![license](https://badgen.net/github/license/sergiodxa/flagged)
+![releases](https://badgen.net/github/releases/sergiodxa/flagged)
+![npm version](https://badgen.net/npm/v/sergiodxa/flagged)
+![dependencies](https://badgen.net/david/dep/sergiodxa/flagged)
+
+## Features
+
 - Hooks API
 - High Order Component API
 - Render Props API
