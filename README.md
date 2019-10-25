@@ -18,6 +18,7 @@
 - High Order Component API
 - Render Props API
 - TypeScript Support
+- Zero Dependencies
 
 ## How to Use It
 
