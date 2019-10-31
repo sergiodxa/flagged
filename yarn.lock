@@ -856,9 +856,9 @@
     wait-for-expect "^3.0.0"
 
 "@testing-library/jest-dom@^4.2.0":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-4.2.1.tgz#e7fad6e85cc1435f82bb97d2704057981b2a43c7"
-  integrity sha512-rzjutoDBsjid1fBvTwwjxJG6tNwEaC669Fljmwenmvm5FN4s+SKeB0DXJGWZOECMN8YSBhLM5k0figtbr/KDDw==
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-4.2.2.tgz#f1463a329697682ecfeb4a7adc0fa51a1df7d2bd"
+  integrity sha512-CvGutOOtep63cJ/bLRjnMQ+dOvzNPpVfXIWr9iLL9Ydbkqt64xG0/O67IFgZ05LSXoxGsnsjvH3gigvMbw30gA==
   dependencies:
     "@babel/runtime" "^7.5.1"
     chalk "^2.4.1"
