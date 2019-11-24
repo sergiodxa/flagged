@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-export type FeatureFlags =
-  | string[]
-  | {
-      [featureName: string]: boolean;
-    };
+type FeatureGroup = {
+  [featureName: string]: boolean | FeatureGroup;
+};
+
+export type FeatureFlags = string[] | FeatureGroup;
 
 const FeatureFlagsContext = React.createContext<FeatureFlags | null>(null);
 
@@ -35,9 +35,17 @@ export function useFeatures(): FeatureFlags {
 }
 
 // Custom Hook API
-export function useFeature(name: string): boolean {
+export function useFeature(name: string): boolean | FeatureFlags {
   const features = useFeatures();
-  return Array.isArray(features) ? features.includes(name) : features[name];
+  if (Array.isArray(features)) return features.includes(name);
+  if (typeof features[name] === 'boolean') return features[name];
+  return name
+    .split('/')
+    .reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
+      if (typeof featureGroup === 'boolean') return featureGroup;
+      if (featureGroup[featureName] === undefined) return false;
+      return featureGroup[featureName];
+    }, features);
 }
 
 // High Order Component API
