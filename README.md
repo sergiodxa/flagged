@@ -19,6 +19,7 @@
 - Render Props API
 - TypeScript Support
 - Zero Dependencies
+- Nested Flags
 
 ## How to Use It
 
@@ -47,6 +48,44 @@ ReactDOM.render(
 ```
 
 Now use `useFeature`, `withFeature` or `Feature` to check if the feature is enabled in your application:
+
+### Features Valid Values
+
+The features prop you pass to `FlagsProvider` could be an array of strings or an object, if you decide to use an object you could also pass nested objects to group feature flags together.
+
+**Using an Array**
+```tsx
+ReactDOM.render(
+  <FlagsProvider features={['v2', 'moderate']}>
+    <App />
+  </FlagsProvider>,
+  document.querySelector('root')
+);
+```
+
+**Using an Object**
+```tsx
+ReactDOM.render(
+  <FlagsProvider features={{ v2: true, moderate: false }}>
+    <App />
+  </FlagsProvider>,
+  document.querySelector('root')
+);
+```
+
+**Using Nested Objects**
+```tsx
+ReactDOM.render(
+  <FlagsProvider
+    features={{ v2: true, content: { moderate: true, admin: false } }}
+  >
+    <App />
+  </FlagsProvider>,
+  document.querySelector('root')
+);
+```
+
+If you use nested objects you will need to either use the `useFeatures` hook or pass a string separated by `/`, e.g. `content/moderate` to read nested flags, if you don't pass the whole path you will get an object so `content` will return `{ moderate: false }` when reading it.
 
 ### `useFeature` Custom Hook
 
@@ -155,6 +194,25 @@ function Header() {
         }
       />
     </header>
+  );
+}
+
+export default Header;
+```
+
+### `useFeatures` Custom Hook
+
+The `useFeatures` custom hook is the base for the `useFeature` custom hook, it gives you the entire feature flags object or array you sent to `FlagsProvider` so you could use it however you want.
+
+```tsx
+import * as React from 'react';
+import { useFeature } from 'flagged';
+
+function Header() {
+  const features = useFeatures();
+
+  return (
+    <header>{features.v2 ? <h1>My App v2</h1> : <h1>My App v1</h1>}</header>
   );
 }
 

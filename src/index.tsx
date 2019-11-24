@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-export type FeatureFlags =
-  | string[]
-  | {
-      [featureName: string]: boolean;
-    }
-  | null;
+type FeatureGroup = {
+  [featureName: string]: boolean | FeatureGroup;
+};
 
-const FeatureFlagsContext = React.createContext<FeatureFlags>(null);
+export type FeatureFlags = string[] | FeatureGroup;
+
+const FeatureFlagsContext = React.createContext<FeatureFlags | null>(null);
 
 export function FlagsProvider({
   features,
@@ -27,12 +26,26 @@ export function FlagsProvider({
 }
 
 // Custom Hook API
-export function useFeature(name: string): boolean {
+export function useFeatures(): FeatureFlags {
   const features = React.useContext(FeatureFlagsContext);
   if (features === null) {
     throw new Error('You must wrap your components in a FlagsProvider.');
   }
-  return Array.isArray(features) ? features.includes(name) : features[name];
+  return features;
+}
+
+// Custom Hook API
+export function useFeature(name: string): boolean | FeatureFlags {
+  const features = useFeatures();
+  if (Array.isArray(features)) return features.includes(name);
+  if (typeof features[name] === 'boolean') return features[name];
+  return name
+    .split('/')
+    .reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
+      if (typeof featureGroup === 'boolean') return featureGroup;
+      if (featureGroup[featureName] === undefined) return false;
+      return featureGroup[featureName];
+    }, features);
 }
 
 // High Order Component API

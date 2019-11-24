@@ -58,6 +58,34 @@ describe(useFeature, () => {
     });
   });
 
+  describe('group', () => {
+    test('exists', () => {
+      const { queryByText } = render(
+        <FlagsProvider
+          features={{ featured: { subFeature: { subSubFeature: true } } }}
+        >
+          <Tester name="featured/subFeature/subSubFeature" />
+        </FlagsProvider>
+      );
+
+      expect(queryByText(/It works/i)).toBeInTheDocument();
+      expect(queryByText(/It doesn't work/i)).not.toBeInTheDocument();
+    });
+
+    test("doesn't exists", () => {
+      const { queryByText } = render(
+        <FlagsProvider
+          features={{ featured: { subFeature: { subSubFeature: true } } }}
+        >
+          <Tester name="super/random/feature" />
+        </FlagsProvider>
+      );
+
+      expect(queryByText(/It works/i)).not.toBeInTheDocument();
+      expect(queryByText(/It doesn't work/i)).toBeInTheDocument();
+    });
+  });
+
   describe('errors', () => {
     test('Missing Provider', () => {
       const spy = jest.spyOn(console, 'error').mockImplementation();
