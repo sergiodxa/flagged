@@ -4,10 +4,9 @@ export type FeatureFlags =
   | string[]
   | {
       [featureName: string]: boolean;
-    }
-  | null;
+    };
 
-const FeatureFlagsContext = React.createContext<FeatureFlags>(null);
+const FeatureFlagsContext = React.createContext<FeatureFlags | null>(null);
 
 export function FlagsProvider({
   features,
@@ -27,11 +26,17 @@ export function FlagsProvider({
 }
 
 // Custom Hook API
-export function useFeature(name: string): boolean {
+export function useFeatures(): FeatureFlags {
   const features = React.useContext(FeatureFlagsContext);
   if (features === null) {
     throw new Error('You must wrap your components in a FlagsProvider.');
   }
+  return features;
+}
+
+// Custom Hook API
+export function useFeature(name: string): boolean {
+  const features = useFeatures();
   return Array.isArray(features) ? features.includes(name) : features[name];
 }
 
