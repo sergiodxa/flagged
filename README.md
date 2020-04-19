@@ -206,7 +206,7 @@ The `useFeatures` custom hook is the base for the `useFeature` custom hook, it g
 
 ```tsx
 import * as React from 'react';
-import { useFeature } from 'flagged';
+import { useFeatures } from 'flagged';
 
 function Header() {
   const features = useFeatures();
