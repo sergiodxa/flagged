@@ -110,7 +110,7 @@ This `withFeature` high order component let's you wrap a component behind a feat
 
 ```tsx
 import * as React from "react";
-import { withFeature } from "flagged":
+import { withFeature } from "flagged";
 
 function Heading() {
   return <h1>My App v2</h1>
