@@ -1,7 +1,7 @@
 {
   "name": "flagged",
   "description": "Feature flags for React made easy with hooks, HOC and Render Props",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "repository": "https://github.com/sergiodxa/flagged.git",
   "homepage": "https://github.com/sergiodxa/flagged",
