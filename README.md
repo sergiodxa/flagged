@@ -9,7 +9,6 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/816ce0bddd76bafba932/test_coverage)](https://codeclimate.com/github/sergiodxa/flagged/test_coverage)
 ![license](https://badgen.net/github/license/sergiodxa/flagged)
 ![releases](https://badgen.net/github/releases/sergiodxa/flagged)
-![npm version](https://badgen.net/npm/v/sergiodxa/flagged)
 ![dependencies](https://badgen.net/david/dep/sergiodxa/flagged)
 
 ## Features
