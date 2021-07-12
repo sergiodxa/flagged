@@ -1,9 +1,10 @@
 ---
-name: 🐞 Bug Report
+name: "\U0001F41E Bug Report"
 about: Report any issue or bug with Flagged.
-title: ""
-labels: "bug"
-assignees: "sergiodxa"
+title: ''
+labels: bug
+assignees: ''
+
 ---
 
 ### Current Behavior

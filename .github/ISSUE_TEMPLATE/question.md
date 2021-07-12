@@ -1,9 +1,10 @@
 ---
-name: ❓ Question
+name: "❓ Question"
 about: Ask any question or doubt about Flagged.
-title: ""
-labels: "question"
-assignees: ""
+title: ''
+labels: question
+assignees: ''
+
 ---
 
 ### Additional Context
