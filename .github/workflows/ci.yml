@@ -15,19 +15,7 @@ jobs:
         node-version: 12
     - name: Install
       run: yarn install
-    - name: Download Code Climate Test Reporter
-      run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    - name: Setup Code Climate Test Reporter
-      run: chmod +x ./cc-test-reporter
-    - name: Prepare Code Climate for Receiving Test Coverage
-      run: ./cc-test-reporter before-build
     - name: Test
       run: yarn test --coverage --coverageReporters=lcov
       env:
         CI: true
-    - name: Move Coverage to CodeClimate Folder
-      run: ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.json coverage/lcov.infog
-    - name: Upload Test Coverage Results to Code Climate
-      run: ./cc-test-reporter upload-coverage -i tmp/codeclimate.json
-      env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
