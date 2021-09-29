@@ -199,6 +199,32 @@ function Header() {
 export default Header;
 ```
 
+### `Feature` RenderFallback prop
+
+Instead of using the implicit return from the function or the render Prop in a ternary expression, as shown in the Render prop exemple, you can render a fallback in case the feature is disabled using renderFallback prop.
+
+** *This will only work if you have a render function or children defined**
+
+```tsx
+import * as React from 'react';
+import { Feature } from 'flagged';
+
+function Header() {
+  return (
+    <header>
+      <Feature
+        name="v2"
+        render={<h1>My App v2</h1>}
+        renderFallback{<h1>My App v1</h1>}
+      />
+    </header>
+  );
+}
+
+export default Header;
+```
+
+
 ### `useFeatures` Custom Hook
 
 The `useFeatures` custom hook is the base for the `useFeature` custom hook, it gives you the entire feature flags object or array you sent to `FlagsProvider` so you could use it however you want.
