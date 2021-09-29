@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FlagsProvider, withFeature, Feature, useFeature } from 'flagged';
+import { FlagsProvider, withFeature, Feature, useFeature } from '../../src/index';
 
 function VersionComponent({ version }) {
   return <h1>You are currently in {version}.</h1>;
@@ -50,9 +50,6 @@ function App() {
       <V1Component />
 
       <V2Component />
-
-      {/* Render Prop */}
-      <Feature name="v3" render={<V3Component />} />
 
       {/* Render and Render Fallback Prop */}
       <Feature name="v3" render={<V3Component />} renderFallback={<p>You are not in V3.</p>} />
