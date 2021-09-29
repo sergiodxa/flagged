@@ -61,6 +61,7 @@ export function Feature({
   name,
   children,
   render = children,
+  renderFallback = null
 }: {
   name: string;
   children?:
@@ -69,8 +70,12 @@ export function Feature({
   render?:
     | React.ReactNode
     | ((hasFeature: boolean | FeatureGroup) => JSX.Element);
+  renderFallback?:
+    | React.ReactNode
+    | (() => JSX.Element);
 }) {
   const hasFeature = useFeature(name);
+  if (!hasFeature && typeof renderFallback === 'function') return renderFallback();
   if (typeof render === 'function') return render(hasFeature);
   if (!hasFeature) return null;
   return render;
