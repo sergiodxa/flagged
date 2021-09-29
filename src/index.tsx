@@ -78,7 +78,7 @@ export function Feature({
   if (!hasFeature && typeof renderFallback === 'function') return renderFallback();
   if (typeof render === 'function') return render(hasFeature);
   if (!hasFeature) return renderFallback;
-  return render;
+  return render ?? null;
 }
 
 // High Order Component API
