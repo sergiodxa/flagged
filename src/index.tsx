@@ -77,7 +77,7 @@ export function Feature({
   const hasFeature = useFeature(name);
   if (!hasFeature && typeof renderFallback === 'function') return renderFallback();
   if (typeof render === 'function') return render(hasFeature);
-  if (!hasFeature) return null;
+  if (!hasFeature) return renderFallback;
   return render;
 }
 
