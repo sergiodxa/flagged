@@ -54,6 +54,9 @@ function App() {
       {/* Render Prop */}
       <Feature name="v3" render={<V3Component />} />
 
+      {/* Render and Render Fallback Prop */}
+      <Feature name="v3" render={<V3Component />} renderFallback={<p>You are not in V3.</p>} />
+
       {/* Function as Children */}
       <Feature name="v4">
         {hasV4 => (hasV4 ? <V4Component /> : <h3>You are not in v4.</h3>)}
