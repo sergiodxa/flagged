@@ -100,6 +100,46 @@ describe(Feature, () => {
       expect(screen.queryByText(/It works/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/It doesn't work/i)).toBeInTheDocument();
     });
+
+    test('renderFallback - element', () => {
+      render(
+        <FlagsProvider features={['featured']}>
+          <Feature name="random" render={<h1>It doesn't work</h1>} renderFallback={<h1>It works</h1>} />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+    });
+
+    test('renderFallback - function - works', () => {
+      render(
+        <FlagsProvider features={['featured']}>
+          <Feature
+            name="random"
+            render={<h1>It does't work</h1>}
+            renderFallback={<h1>It works</h1>}
+          />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It doesn't work/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+    });
+
+    test("renderFallback - function - doesn't work", () => {
+      render(
+        <FlagsProvider features={['featured']}>
+          <Feature
+            name="featured"
+            render={<h1>It works</h1>}
+            renderFallback={<h1>It doesn't work</h1>}
+          />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+      expect(screen.queryByText(/It doesn't work/i)).not.toBeInTheDocument();
+    });
   });
 
   describe('object', () => {
@@ -185,6 +225,46 @@ describe(Feature, () => {
 
       expect(screen.queryByText(/It works/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/It doesn't work/i)).toBeInTheDocument();
+    });
+
+    test('renderFallback - element', () => {
+      render(
+        <FlagsProvider features={{ featured: true }}>
+          <Feature name="random" render={<h1>It doesn't work</h1>} renderFallback={<h1>It works</h1>} />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+    });
+
+    test('renderFallback - function - works', () => {
+      render(
+        <FlagsProvider features={{ featured: true }}>
+          <Feature
+            name="random"
+            render={<h1>It does't work</h1>}
+            renderFallback={<h1>It works</h1>}
+          />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It doesn't work/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+    });
+
+    test("renderFallback - function - doesn't work", () => {
+      render(
+        <FlagsProvider features={{ featured: true }}>
+          <Feature
+            name="featured"
+            render={<h1>It works</h1>}
+            renderFallback={<h1>It doesn't work</h1>}
+          />
+        </FlagsProvider>
+      );
+
+      expect(screen.queryByText(/It works/i)).toBeInTheDocument();
+      expect(screen.queryByText(/It doesn't work/i)).not.toBeInTheDocument();
     });
   });
 });
