@@ -203,7 +203,7 @@ export default Header;
 
 Instead of using the implicit return from the function or the render Prop in a ternary expression, as shown in the Render prop exemple, you can render a fallback in case the feature is disabled using renderFallback prop.
 
-** *This will only work if you have a render function or children defined**
+**This will only work if you have a render function or children defined*
 
 ```tsx
 import * as React from 'react';
