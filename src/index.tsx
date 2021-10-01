@@ -56,12 +56,35 @@ export function useFeature(name: string): boolean | FeatureGroup {
     }, features);
 }
 
+export function useExactFeatures(names: Array<string>): boolean | FeatureGroup {
+  const features = useFeatures();
+  let matchCount = 0;
+  if (Array.isArray(features)) {
+    names.forEach(name=>{
+        if(features.include(name))
+          matchCount++;
+     });
+  };
+  names.forEach(name=>{
+    if (typeof features[name] === 'boolean' && features[name] == true) matchCount++;
+    name
+    .split('/')
+    .reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
+      if (typeof featureGroup === 'boolean' && featureGroup == true) matchCount++;
+      if (featureGroup[featureName] === undefined) continue;
+      if (featureGroup[featureName] === 'boolean' && featureGroup[featureName] == true) matchCount++;
+    }, features);
+  })  
+  return matchCount === names.length;
+}
+
 // Render Prop API
 export function Feature({
   name,
   children,
   render = children,
-  renderFallback = null
+  renderFallback = null,
+  names = []
 }: {
   name: string;
   children?:
@@ -74,7 +97,7 @@ export function Feature({
     | React.ReactNode
     | (() => JSX.Element);
 }) {
-  const hasFeature = useFeature(name);
+  const hasFeature = names.length ? useExactFeatures(names) : useFeature(name);
   if (!hasFeature && typeof renderFallback === 'function') return renderFallback();
   if (typeof render === 'function') return render(hasFeature);
   if (!hasFeature) return renderFallback;
