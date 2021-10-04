@@ -1,7 +1,7 @@
 {
   "name": "flagged",
-  "description": "Feature flags for React made easy with hooks, HOC and Render Props",
-  "version": "2.0.2",
+  "description": "Forked from flagged. Feature flags for React made easy with hooks, HOC and Render Props",
+  "version": "2.1.0",
   "license": "MIT",
   "repository": "https://github.com/sergiodxa/flagged.git",
   "homepage": "https://github.com/sergiodxa/flagged",
@@ -15,7 +15,7 @@
     "url": "https://github.com/sergiodxa/flagged"
   },
   "main": "dist/index.js",
-  "module": "https://github.com/Metalefs/flagged/tarball/SHA",
+  "module": "https://github.com/Metalefs/flagged/tarball/d8cec7594fee9d8f0cd28a35ead296f40ffc128d",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
