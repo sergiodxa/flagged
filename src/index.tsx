@@ -60,19 +60,20 @@ export function useExactFeatures(names: Array<string>): boolean | FeatureGroup {
   const features = useFeatures();
   let matchCount = 0;
   if (Array.isArray(features)) {
-    names.forEach(name=>{
-        if(features.include(name))
-          matchCount++;
-     });
+    return names.every(r=> features.indexOf(r) >= 0)
   };
   names.forEach(name=>{
-    if (typeof features[name] === 'boolean' && features[name] == true) matchCount++;
-    name
+    if(features[name] === undefined) return;
+    if (typeof features[name] === 'boolean' && features[name] == true) { matchCount++; return }
+
+    return name
     .split('/')
     .reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
-      if (typeof featureGroup === 'boolean' && featureGroup == true) matchCount++;
-      if (featureGroup[featureName] === undefined) continue;
-      if (featureGroup[featureName] === 'boolean' && featureGroup[featureName] == true) matchCount++;
+      if (typeof featureGroup === 'boolean' && featureGroup == true){ matchCount++; return featureGroup}
+      if (typeof featureGroup === 'object' && featureGroup[featureName] === undefined) return false;
+      if (typeof featureGroup === 'object' && typeof featureGroup[featureName] === 'boolean' 
+        && featureGroup[featureName] == true){ matchCount++; return featureGroup[featureName]}
+        return false;
     }, features);
   })  
   return matchCount === names.length;
@@ -84,9 +85,10 @@ export function Feature({
   children,
   render = children,
   renderFallback = null,
-  names = []
+  names = null
 }: {
-  name: string;
+  name?: string;
+  names?: string[] | null;
   children?:
     | React.ReactNode
     | ((hasFeature: boolean | FeatureGroup) => JSX.Element);
@@ -97,7 +99,7 @@ export function Feature({
     | React.ReactNode
     | (() => JSX.Element);
 }) {
-  const hasFeature = names.length ? useExactFeatures(names) : useFeature(name);
+  const hasFeature = names == null ? useFeature(name??'') : useExactFeatures(names);
   if (!hasFeature && typeof renderFallback === 'function') return renderFallback();
   if (typeof render === 'function') return render(hasFeature);
   if (!hasFeature) return renderFallback;
