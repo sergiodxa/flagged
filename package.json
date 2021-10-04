@@ -15,7 +15,7 @@
     "url": "https://github.com/sergiodxa/flagged"
   },
   "main": "dist/index.js",
-  "module": "https://github.com/Metalefs/flagged/tarball/d8cec7594fee9d8f0cd28a35ead296f40ffc128d",
+  "module": "dist/flagged.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
