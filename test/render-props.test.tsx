@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
-import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { FlagsProvider, Feature } from '../src';
+import * as React from 'react';
+import { Feature, FlagsProvider } from '../src';
 
 describe(Feature, () => {
   describe('array', () => {
@@ -33,7 +33,7 @@ describe(Feature, () => {
       render(
         <FlagsProvider features={['featured']}>
           <Feature name="featured">
-            {(isFeatured: boolean) =>
+            {isFeatured =>
               isFeatured ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           </Feature>
@@ -48,7 +48,7 @@ describe(Feature, () => {
       render(
         <FlagsProvider features={['featured']}>
           <Feature name="random">
-            {(isRandom: boolean) =>
+            {isRandom =>
               isRandom ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           </Feature>
@@ -74,7 +74,7 @@ describe(Feature, () => {
         <FlagsProvider features={['featured']}>
           <Feature
             name="featured"
-            render={(isFeatured: boolean) =>
+            render={isFeatured =>
               isFeatured ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           />
@@ -90,7 +90,7 @@ describe(Feature, () => {
         <FlagsProvider features={['featured']}>
           <Feature
             name="random"
-            render={(isRandom: boolean) =>
+            render={isRandom =>
               isRandom ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           />
@@ -119,7 +119,7 @@ describe(Feature, () => {
       render(
         <FlagsProvider features={{ featured: true }}>
           <Feature name="featured">
-            {(isFeatured: boolean) =>
+            {isFeatured =>
               isFeatured ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           </Feature>
@@ -134,7 +134,7 @@ describe(Feature, () => {
       render(
         <FlagsProvider features={{ featured: true }}>
           <Feature name="random">
-            {(isRandom: boolean) =>
+            {isRandom =>
               isRandom ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           </Feature>
@@ -160,7 +160,7 @@ describe(Feature, () => {
         <FlagsProvider features={{ featured: true }}>
           <Feature
             name="featured"
-            render={(isFeatured: boolean) =>
+            render={isFeatured =>
               isFeatured ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           />
@@ -176,7 +176,7 @@ describe(Feature, () => {
         <FlagsProvider features={{ featured: true }}>
           <Feature
             name="random"
-            render={(isRandom: boolean) =>
+            render={isRandom =>
               isRandom ? <h1>It works</h1> : <h1>It doesn't work</h1>
             }
           />

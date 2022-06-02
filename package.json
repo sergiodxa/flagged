@@ -41,7 +41,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "husky": {
     "hooks": {
@@ -59,11 +59,11 @@
     "@testing-library/jest-dom": "^5.0.1",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^28.1.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5",
     "husky": "^8.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "tsdx": "^0.14.0",
     "tslib": "^2.0.0",
     "typescript": "^4.0.2"

@@ -73,7 +73,7 @@ export function Feature({
   const hasFeature = useFeature(name);
   if (typeof render === 'function') return render(hasFeature);
   if (!hasFeature) return null;
-  return render;
+  return <React.Fragment>{render}</React.Fragment>;
 }
 
 // High Order Component API
