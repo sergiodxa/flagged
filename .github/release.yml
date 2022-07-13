@@ -15,6 +15,9 @@ changelog:
   - title: Deprecations
     labels:
     - deprecated
+  - title: Dependency Upgrades
+    labels:
+    - dependencies
   - title: Other Changes
     labels:
        - "*"
