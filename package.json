@@ -62,7 +62,7 @@
     "@types/react-dom": "^18.0.5",
     "@vitest/coverage-v8": "^1.0.1",
     "happy-dom": "^13.2.1",
-    "husky": "^8.0.1",
+    "husky": "^9.0.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "tsdx": "^0.14.1",
