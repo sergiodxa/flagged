@@ -142,7 +142,7 @@ function Header() {
   return (
     <header>
       <Feature name="v2">
-        {(isEnabled: boolean) =>
+        {(isEnabled) =>
           isEnabled ? <h1>My App v2</h1> : <h1>My App v1</h1>
         }
       </Feature>
@@ -179,7 +179,7 @@ function Header() {
     <header>
       <Feature
         name="v2"
-        render={(isEnabled: boolean) =>
+        render={(isEnabled) =>
           isEnabled ? <h1>My App v2</h1> : <h1>My App v1</h1>
         }
       />
