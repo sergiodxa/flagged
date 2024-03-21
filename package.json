@@ -37,7 +37,9 @@
 		"url": "https://github.com/sergiodxa/flagged/issues"
 	},
 	"files": [
-		"dist"
+		"build",
+		"package.json",
+		"README.md"
 	],
 	"keywords": [
 		"react",
