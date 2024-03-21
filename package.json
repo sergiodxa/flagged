@@ -1,7 +1,7 @@
 {
   "name": "flagged",
   "description": "Feature flags for React made easy with hooks, HOC and Render Props",
-  "version": "2.0.10",
+  "version": "3.0.0",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
