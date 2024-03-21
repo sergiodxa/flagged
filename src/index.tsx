@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
 type FeatureGroup = {
-  [featureName: string]: boolean | FeatureGroup;
+	[featureName: string]: boolean | FeatureGroup;
 };
 
 export type FeatureFlags = string[] | FeatureGroup;
@@ -9,80 +9,89 @@ export type FeatureFlags = string[] | FeatureGroup;
 const FeatureFlagsContext = React.createContext<FeatureGroup>({});
 
 function transformFlags(features: FeatureFlags) {
-  if (!Array.isArray(features)) return features;
-  return Object.fromEntries(features.map(feature => [feature, true]));
+	if (!Array.isArray(features)) return features;
+	return Object.fromEntries(features.map((feature) => [feature, true]));
 }
 
 function mergeFeatures(a: FeatureGroup, b: FeatureGroup): FeatureGroup {
-  return { ...a, ...b };
+	return { ...a, ...b };
 }
 
 export function FlagsProvider({
-  features = {},
-  children,
+	features = {},
+	children,
 }: {
-  features?: FeatureFlags;
-  children: React.ReactNode;
+	features?: FeatureFlags;
+	children: React.ReactNode;
 }) {
-  const currentFeatures = useFeatures();
-  return (
-    <FeatureFlagsContext.Provider
-      value={mergeFeatures(
-        transformFlags(currentFeatures),
-        transformFlags(features)
-      )}
-    >
-      {children}
-    </FeatureFlagsContext.Provider>
-  );
+	const currentFeatures = useFeatures();
+	return (
+		<FeatureFlagsContext.Provider
+			value={mergeFeatures(
+				transformFlags(currentFeatures),
+				transformFlags(features),
+			)}
+		>
+			{children}
+		</FeatureFlagsContext.Provider>
+	);
 }
 
 // Custom Hook API
 export function useFeatures(): FeatureGroup {
-  return React.useContext(FeatureFlagsContext);
+	return React.useContext(FeatureFlagsContext);
 }
 
 // Custom Hook API
 export function useFeature(name: string): boolean | FeatureGroup {
-  const features = useFeatures();
-  if (Array.isArray(features)) return features.includes(name);
-  if (typeof features[name] === 'boolean') return features[name];
-  return name
-    .split('/')
-    .reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
-      if (typeof featureGroup === 'boolean') return featureGroup;
-      if (featureGroup[featureName] === undefined) return false;
-      return featureGroup[featureName];
-    }, features);
+	const features = useFeatures();
+	if (Array.isArray(features)) return features.includes(name);
+	if (typeof features[name] === "boolean") return features[name];
+	return (
+		name
+			.split("/")
+			// eslint-disable-next-line unicorn/no-array-reduce
+			.reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
+				if (typeof featureGroup === "boolean") return featureGroup;
+				if (featureGroup[featureName] === undefined) return false;
+				return featureGroup[featureName];
+			}, features)
+	);
 }
 
 // Render Prop API
 export function Feature({
-  name,
-  children,
-  render = children,
+	name,
+	children,
+	render = children,
 }: {
-  name: string;
-  children?:
-    | React.ReactNode
-    | ((hasFeature: boolean | FeatureGroup) => JSX.Element);
-  render?:
-    | React.ReactNode
-    | ((hasFeature: boolean | FeatureGroup) => JSX.Element);
+	name: string;
+	children?:
+		| React.ReactNode
+		| ((hasFeature: boolean | FeatureGroup) => JSX.Element);
+	render?:
+		| React.ReactNode
+		| ((hasFeature: boolean | FeatureGroup) => JSX.Element);
 }) {
-  const hasFeature = useFeature(name);
-  if (typeof render === 'function') return render(hasFeature);
-  if (!hasFeature) return null;
-  return <React.Fragment>{render}</React.Fragment>;
+	const hasFeature = useFeature(name);
+	if (typeof render === "function") return render(hasFeature);
+	if (!hasFeature) return null;
+	return <React.Fragment>{render}</React.Fragment>;
 }
 
 // High Order Component API
-export function withFeature(featureName: string) {
-  return (Component: Function) => (props: React.ComponentProps<any>) => {
-    return (
-      <Feature name={featureName}>
-        <Component {...props} />
-      </Feature>
-    );
-  };
+export function withFeature<Props extends object>(featureName: string) {
+	return (Component: React.ComponentType<Props>) => {
+		function WithFeature(props: Props) {
+			return (
+				<Feature name={featureName}>
+					<Component {...props} />
+				</Feature>
+			);
+		}
+
+		WithFeature.displayName = `WithFeature(${Component.displayName || Component.name})`;
+
+		return WithFeature;
+	};
 }
