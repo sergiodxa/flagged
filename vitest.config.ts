@@ -1,13 +1,18 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite';
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [],
-  test: {
-    globals: true,
-    environment: 'happy-dom',
-    setupFiles: ['./vitest.setup.ts'],
-  },
+	plugins: [react()],
+	test: {
+		globals: true,
+		environment: "happy-dom",
+		setupFiles: ["./vitest.setup.ts"],
+		coverage: {
+			all: true,
+			include: ["src/**/*"],
+		},
+	},
 });
