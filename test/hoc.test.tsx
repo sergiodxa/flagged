@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import { describe, test, expect } from 'vitest';
 import { FlagsProvider, withFeature } from '../src';
 
 const Tester = withFeature('featured')(() => <h1>It works</h1>);
