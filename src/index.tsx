@@ -6,7 +6,7 @@ type FeatureGroup = {
 
 export type FeatureFlags = string[] | FeatureGroup;
 
-const FeatureFlagsContext = React.createContext<FeatureGroup>({});
+let FeatureFlagsContext = React.createContext<FeatureGroup>({});
 
 function transformFlags(features: FeatureFlags) {
 	if (!Array.isArray(features)) return features;
@@ -24,7 +24,7 @@ export function FlagsProvider({
 	features?: FeatureFlags;
 	children: React.ReactNode;
 }) {
-	const currentFeatures = useFeatures();
+	let currentFeatures = useFeatures();
 	return (
 		<FeatureFlagsContext.Provider
 			value={mergeFeatures(
@@ -44,19 +44,18 @@ export function useFeatures(): FeatureGroup {
 
 // Custom Hook API
 export function useFeature(name: string): boolean | FeatureGroup {
-	const features = useFeatures();
+	let features = useFeatures();
 	if (Array.isArray(features)) return features.includes(name);
 	if (typeof features[name] === "boolean") return features[name];
-	return (
-		name
-			.split("/")
-			// eslint-disable-next-line unicorn/no-array-reduce
-			.reduce<FeatureGroup | boolean>((featureGroup, featureName: string) => {
-				if (typeof featureGroup === "boolean") return featureGroup;
-				if (featureGroup[featureName] === undefined) return false;
-				return featureGroup[featureName];
-			}, features)
-	);
+
+	let featureGroup: FeatureGroup | boolean = structuredClone(features);
+	for (let featureName of name.split("/")) {
+		if (typeof featureGroup === "boolean") return featureGroup;
+		if (featureGroup[featureName] === undefined) return false;
+		featureGroup = featureGroup[featureName];
+	}
+
+	return featureGroup;
 }
 
 // Render Prop API
@@ -73,7 +72,7 @@ export function Feature({
 		| React.ReactNode
 		| ((hasFeature: boolean | FeatureGroup) => JSX.Element);
 }) {
-	const hasFeature = useFeature(name);
+	let hasFeature = useFeature(name);
 	if (typeof render === "function") return render(hasFeature);
 	if (!hasFeature) return null;
 	return <React.Fragment>{render}</React.Fragment>;
