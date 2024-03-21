@@ -8,10 +8,8 @@
 	},
 	"type": "module",
 	"sideEffects": false,
-	"exports": {
-		"./package.json": "./package.json",
-		".": "./build/index.js"
-	},
+	"main": "./build/index.js",
+	"typings": "./build/index.d.ts",
 	"scripts": {
 		"prepare": "npm run build",
 		"build": "tsc --project tsconfig.json --outDir ./build",
@@ -37,9 +35,6 @@
 	"bugs": {
 		"url": "https://github.com/sergiodxa/flagged/issues"
 	},
-	"main": "dist/index.js",
-	"module": "dist/flagged.esm.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
