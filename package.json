@@ -1,91 +1,91 @@
 {
-  "name": "flagged",
-  "description": "Feature flags for React made easy with hooks, HOC and Render Props",
-  "version": "3.0.0",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "type": "module",
-  "sideEffects": false,
-  "main": "./build/index.js",
-  "typings": "./build/index.d.ts",
-  "scripts": {
-    "prepublishOnly": "npm run build",
-    "prepare": "npm run build",
-    "build": "tsc --project tsconfig.json --outDir ./build",
-    "postbuild": "prettier --write \"build/**/*.js\" \"build/**/*.d.ts\"",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.ts\" \"test/**/*.tsx\" \"*.md\" \"package.json\"",
-    "typecheck": "tsc --project tsconfig.json --noEmit",
-    "lint": "eslint --ext .ts,.tsx src/",
-    "test": "vitest --run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage",
-    "test:exports": "bun scripts/check-pkg-exports.ts"
-  },
-  "homepage": "https://github.com/sergiodxa/flagged",
-  "author": {
-    "name": "Sergio Xalambrí",
-    "url": "https://sergiodxa.com",
-    "email": "hello@sergiodxa.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sergiodxa/flagged.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sergiodxa/flagged/issues"
-  },
-  "files": [
-    "build",
-    "package.json",
-    "README.md"
-  ],
-  "keywords": [
-    "react",
-    "feature flags",
-    "flags",
-    "features",
-    "hooks",
-    "hoc",
-    "high order component",
-    "render props",
-    "typescript",
-    "types"
-  ],
-  "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
-  },
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.16.0",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^16.0.0",
-    "@types/bun": "^1.0.10",
-    "@types/react": "^18.2.25",
-    "@typescript-eslint/eslint-plugin": "^8.8.0",
-    "@typescript-eslint/parser": "^7.3.1",
-    "@vitejs/plugin-react": "^4.1.0",
-    "@vitest/coverage-v8": "^1.4.0",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-cypress": "^3.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jest-dom": "^5.1.0",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-promise": "^7.1.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-testing-library": "^6.0.2",
-    "eslint-plugin-unicorn": "^56.0.0",
-    "happy-dom": "^15.7.4",
-    "prettier": "^3.2.5",
-    "react": "^18.0.0",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.2",
-    "vitest": "^2.1.2"
-  }
+	"name": "flagged",
+	"description": "Feature flags for React made easy with hooks, HOC and Render Props",
+	"version": "3.0.0",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"type": "module",
+	"sideEffects": false,
+	"main": "./build/index.js",
+	"typings": "./build/index.d.ts",
+	"scripts": {
+		"prepublishOnly": "npm run build",
+		"prepare": "npm run build",
+		"build": "tsc --project tsconfig.json --outDir ./build",
+		"postbuild": "prettier --write \"build/**/*.js\" \"build/**/*.d.ts\"",
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.ts\" \"test/**/*.tsx\" \"*.md\" \"package.json\"",
+		"typecheck": "tsc --project tsconfig.json --noEmit",
+		"lint": "eslint --ext .ts,.tsx src/",
+		"test": "vitest --run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest --coverage",
+		"test:exports": "bun scripts/check-pkg-exports.ts"
+	},
+	"homepage": "https://github.com/sergiodxa/flagged",
+	"author": {
+		"name": "Sergio Xalambrí",
+		"url": "https://sergiodxa.com",
+		"email": "hello@sergiodxa.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sergiodxa/flagged.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sergiodxa/flagged/issues"
+	},
+	"files": [
+		"build",
+		"package.json",
+		"README.md"
+	],
+	"keywords": [
+		"react",
+		"feature flags",
+		"flags",
+		"features",
+		"hooks",
+		"hoc",
+		"high order component",
+		"render props",
+		"typescript",
+		"types"
+	],
+	"peerDependencies": {
+		"react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+	},
+	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.16.0",
+		"@testing-library/dom": "^10.4.1",
+		"@testing-library/jest-dom": "^6.4.2",
+		"@testing-library/react": "^16.0.0",
+		"@types/bun": "^1.0.10",
+		"@types/react": "^18.2.25",
+		"@typescript-eslint/eslint-plugin": "^8.8.0",
+		"@typescript-eslint/parser": "^7.3.1",
+		"@vitejs/plugin-react": "^4.1.0",
+		"@vitest/coverage-v8": "^1.4.0",
+		"eslint": "^8.12.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-cypress": "^3.0.0",
+		"eslint-plugin-import": "^2.28.1",
+		"eslint-plugin-jest-dom": "^5.1.0",
+		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-promise": "^7.1.0",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-testing-library": "^6.0.2",
+		"eslint-plugin-unicorn": "^56.0.0",
+		"happy-dom": "^15.7.4",
+		"prettier": "^3.2.5",
+		"react": "^18.0.0",
+		"react-dom": "^18.3.1",
+		"typescript": "^5.2.2",
+		"vite": "^5.2.2",
+		"vitest": "^2.1.2"
+	}
 }

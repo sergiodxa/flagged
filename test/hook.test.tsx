@@ -100,6 +100,44 @@ describe(useFeature, () => {
 
 			expect(screen.queryByText(/it works/i)).not.toBeInTheDocument();
 			expect(screen.queryByText(/it does not work/i)).toBeInTheDocument();
+			expect(warnings).toContain(
+				"Feature flag 'v2' is not defined. Defaulting to false.",
+			);
+
+			console.warn = originalConsole;
+		});
+
+		test("undefined nested feature with console warning", () => {
+			const originalConsole = console.warn;
+			const warnings: string[] = [];
+			console.warn = (message: string) => warnings.push(message);
+
+			render(
+				<FlagsProvider features={{ v3: true, moderate: false }}>
+					<Tester name="v2/subfeature" />
+				</FlagsProvider>,
+			);
+
+			expect(screen.queryByText(/it works/i)).not.toBeInTheDocument();
+			expect(screen.queryByText(/it does not work/i)).toBeInTheDocument();
+			expect(warnings).toContain("Feature flag 'v2/subfeature' is not defined. Defaulting to false.");
+
+			console.warn = originalConsole;
+		});
+
+		test("undefined feature in array with console warning", () => {
+			const originalConsole = console.warn;
+			const warnings: string[] = [];
+			console.warn = (message: string) => warnings.push(message);
+
+			render(
+				<FlagsProvider features={["v3", "moderate"]}>
+					<Tester name="v2" />
+				</FlagsProvider>,
+			);
+
+			expect(screen.queryByText(/it works/i)).not.toBeInTheDocument();
+			expect(screen.queryByText(/it does not work/i)).toBeInTheDocument();
 			expect(warnings).toContain("Feature flag 'v2' is not defined. Defaulting to false.");
 
 			console.warn = originalConsole;

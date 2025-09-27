@@ -45,13 +45,30 @@ export function useFeatures(): FeatureGroup {
 // Custom Hook API
 export function useFeature(name: string): boolean | FeatureGroup {
 	let features = useFeatures();
-	if (Array.isArray(features)) return features.includes(name);
+	if (Array.isArray(features)) {
+		const hasFeature = features.includes(name);
+		if (!hasFeature) {
+			console.warn(
+				`Feature flag '${name}' is not defined. Defaulting to false.`,
+			);
+		}
+		return hasFeature;
+	}
 	if (typeof features[name] === "boolean") return features[name];
+	if (features[name] === undefined && !name.includes("/")) {
+		console.warn(`Feature flag '${name}' is not defined. Defaulting to false.`);
+		return false;
+	}
 
 	let featureGroup: FeatureGroup | boolean = structuredClone(features);
 	for (let featureName of name.split("/")) {
 		if (typeof featureGroup === "boolean") return featureGroup;
-		if (featureGroup[featureName] === undefined) return false;
+		if (featureGroup[featureName] === undefined) {
+			console.warn(
+				`Feature flag '${name}' is not defined. Defaulting to false.`,
+			);
+			return false;
+		}
 		featureGroup = featureGroup[featureName];
 	}
 
