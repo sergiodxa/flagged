@@ -77,6 +77,9 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# npm lock file (project uses Bun)
+package-lock.json
+
 # dotenv environment variables file
 .env
 .env.test
