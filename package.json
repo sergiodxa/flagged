@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.0",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^16.0.0",
     "@types/bun": "^1.0.10",
@@ -82,6 +83,7 @@
     "happy-dom": "^15.7.4",
     "prettier": "^3.2.5",
     "react": "^18.0.0",
+    "react-dom": "^18.3.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.2",
     "vitest": "^2.1.2"
