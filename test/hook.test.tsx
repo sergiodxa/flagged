@@ -142,5 +142,44 @@ describe(useFeature, () => {
 
 			console.warn = originalConsole;
 		});
+
+		test("explicitly false feature should not warn", () => {
+			const originalConsole = console.warn;
+			const warnings: string[] = [];
+			console.warn = (message: string) => warnings.push(message);
+
+			render(
+				<FlagsProvider features={{ enabled: true, disabled: false }}>
+					<Tester name="disabled" />
+				</FlagsProvider>,
+			);
+
+			expect(screen.queryByText(/it works/i)).not.toBeInTheDocument();
+			expect(screen.queryByText(/it does not work/i)).toBeInTheDocument();
+			expect(warnings).toHaveLength(0); // Should NOT warn for explicitly false features
+
+			console.warn = originalConsole;
+		});
+
+		test("falsy but not undefined values should not warn", () => {
+			const originalConsole = console.warn;
+			const warnings: string[] = [];
+			console.warn = (message: string) => warnings.push(message);
+
+			// TypeScript might not allow this, but let's test the runtime behavior
+			const features = { enabled: true, disabled: false, nullValue: null, zeroValue: 0 };
+
+			render(
+				<FlagsProvider features={features as any}>
+					<Tester name="nullValue" />
+				</FlagsProvider>,
+			);
+
+			expect(screen.queryByText(/it works/i)).not.toBeInTheDocument();
+			expect(screen.queryByText(/it does not work/i)).toBeInTheDocument();
+			expect(warnings).toHaveLength(0); // Should NOT warn for null values (not undefined)
+
+			console.warn = originalConsole;
+		});
 	});
 });
