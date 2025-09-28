@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, test, expect } from "vitest";
-import { Feature, FlagsProvider } from "../src";
+import { describe, test, expect } from "bun:test";
+import { Feature, FlagsProvider } from "../src/index.js";
 
 describe(Feature, () => {
 	describe("array", () => {

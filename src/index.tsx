@@ -1,12 +1,17 @@
-import * as React from "react";
+import {
+	createContext,
+	Fragment,
+	useContext,
+	type ReactNode,
+	type ReactElement,
+	type ComponentType,
+} from "react";
 
-type FeatureGroup = {
-	[featureName: string]: boolean | FeatureGroup;
-};
+type FeatureGroup = { [featureName: string]: boolean | FeatureGroup };
 
 export type FeatureFlags = string[] | FeatureGroup;
 
-let FeatureFlagsContext = React.createContext<FeatureGroup>({});
+let FeatureFlagsContext = createContext<FeatureGroup>({});
 
 function transformFlags(features: FeatureFlags) {
 	if (!Array.isArray(features)) return features;
@@ -22,7 +27,7 @@ export function FlagsProvider({
 	children,
 }: {
 	features?: FeatureFlags;
-	children: React.ReactNode;
+	children: ReactNode;
 }) {
 	let currentFeatures = useFeatures();
 	return (
@@ -39,7 +44,7 @@ export function FlagsProvider({
 
 // Custom Hook API
 export function useFeatures(): FeatureGroup {
-	return React.useContext(FeatureFlagsContext);
+	return useContext(FeatureFlagsContext);
 }
 
 // Custom Hook API
@@ -65,22 +70,18 @@ export function Feature({
 	render = children,
 }: {
 	name: string;
-	children?:
-		| React.ReactNode
-		| ((hasFeature: boolean | FeatureGroup) => JSX.Element);
-	render?:
-		| React.ReactNode
-		| ((hasFeature: boolean | FeatureGroup) => JSX.Element);
+	children?: ReactNode | ((hasFeature: boolean | FeatureGroup) => ReactElement);
+	render?: ReactNode | ((hasFeature: boolean | FeatureGroup) => ReactElement);
 }) {
 	let hasFeature = useFeature(name);
 	if (typeof render === "function") return render(hasFeature);
 	if (!hasFeature) return null;
-	return <React.Fragment>{render}</React.Fragment>;
+	return <Fragment>{render}</Fragment>;
 }
 
 // High Order Component API
 export function withFeature<Props extends object>(featureName: string) {
-	return (Component: React.ComponentType<Props>) => {
+	return (Component: ComponentType<Props>) => {
 		function WithFeature(props: Props) {
 			return (
 				<Feature name={featureName}>

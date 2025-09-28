@@ -1,0 +1,13 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": [
+		"import",
+		"typescript",
+		"unicorn",
+		"react",
+		"eslint",
+		"oxc",
+		"vitest"
+	],
+	"env": { "browser": true }
+}
