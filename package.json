@@ -79,7 +79,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-testing-library": "^6.0.2",
 		"eslint-plugin-unicorn": "^56.0.0",
-		"happy-dom": "^15.7.4",
+		"happy-dom": "^20.0.0",
 		"oxlint": "^1.18.0",
 		"prettier": "^3.2.5",
 		"react": "^19.0.0",
